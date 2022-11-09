@@ -6,11 +6,11 @@ namespace NET104_Project.IRepositories
 {
     public interface ISanphamRepositories
     {
-        IEnumerable<Sanpham> GetAll();
-        Sanpham GetById(Guid id);
-        bool AddSanpham(Sanpham sanpham);
-        bool RemoveSanpham(Sanpham sanpham);
-        bool UpdateSanpham(Sanpham sanpham);
+        IEnumerable<Sanpham> GetAll(); // Lấy tất cả các SP trong DB
+        Sanpham GetById(Guid id); // Lấy sản phẩm theo ID
+        bool AddSanpham(Sanpham sanpham); // Thêm Sản phẩm
+        bool RemoveSanpham(Sanpham sanpham); // Xóa
+        bool UpdateSanpham(Sanpham sanpham); // Sửa 1 sản phẩm
 
     }
 }
