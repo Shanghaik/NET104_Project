@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using NET104_Project.IRepositories;
 using NET104_Project.Models;
+using NET104_Project.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,10 +15,11 @@ namespace NET104_Project.Controllers
     {
         private readonly ILogger<HomeController> _logger;
         public CuahangDbContext CuahangDbContext;
-        public HomeController(ILogger<HomeController> logger, CuahangDbContext cuahangDbContext)
+        public ISanphamRepositories _sanphamRepositories;
+        public HomeController(ILogger<HomeController> logger, ISanphamRepositories sanphamRepositories)
         {
             _logger = logger;
-            CuahangDbContext = cuahangDbContext;
+            _sanphamRepositories = sanphamRepositories;
         }
 
         public IActionResult Index()
@@ -41,14 +44,7 @@ namespace NET104_Project.Controllers
 
         public IActionResult HienthiSanpham()
         {
-            List<Sanpham> sanphams = new List<Sanpham>()
-            {
-                new Sanpham{Id = Guid.NewGuid(), Ten = "Bimbim", TrangThai = true },
-                new Sanpham{Id = Guid.NewGuid(), Ten = "Redbull", TrangThai = false },
-                new Sanpham{Id = Guid.NewGuid(), Ten = "TV", TrangThai = true },
-                new Sanpham{Id = Guid.NewGuid(), Ten = "ABC", TrangThai = false },
-                new Sanpham{Id = Guid.NewGuid(), Ten = "1234", TrangThai = true }
-            };
+            List<Sanpham> sanphams = _sanphamRepositories.GetAll().ToList();
             return View(sanphams);
         }
         

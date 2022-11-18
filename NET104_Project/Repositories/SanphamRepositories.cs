@@ -9,6 +9,10 @@ namespace NET104_Project.Repositories
     public class SanphamRepositories : ISanphamRepositories
     {
         CuahangDbContext cuahangDbContext;
+        public SanphamRepositories()
+        {
+            this.cuahangDbContext = new CuahangDbContext();
+        }
         public SanphamRepositories(CuahangDbContext cuahangDbContext) 
             // Tạo constructor
         {
