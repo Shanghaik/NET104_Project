@@ -14,7 +14,7 @@ namespace NET104_Project.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        public CuahangDbContext CuahangDbContext;
+        //public CuahangDbContext CuahangDbContext;
         public ISanphamRepositories _sanphamRepositories;
         public HomeController(ILogger<HomeController> logger, ISanphamRepositories sanphamRepositories)
         {
@@ -44,9 +44,45 @@ namespace NET104_Project.Controllers
 
         public IActionResult HienthiSanpham()
         {
-            List<Sanpham> sanphams = _sanphamRepositories.GetAll().ToList();
+            var sanphams = _sanphamRepositories.GetAll();
             return View(sanphams);
         }
-        
+
+        public IActionResult Details(Guid id)
+        {
+            var x = _sanphamRepositories.GetById(id);
+            return View(x);
+        }
+
+        public IActionResult CreateNew(Sanpham sanpham)
+        {
+            if (_sanphamRepositories.AddSanpham(sanpham))
+            {
+                return RedirectToAction("HienthiSanpham");
+            }
+            else return View();
+        }
+        public IActionResult Delete(Sanpham sp)
+        {
+            if (_sanphamRepositories.RemoveSanpham(sp))
+            {
+                return View();
+            }
+            else return BadRequest();
+        }
+        public IActionResult Edit(Guid id)
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult Edit(Sanpham sp)
+        {
+            if (_sanphamRepositories.UpdateSanpham(sp))
+            {
+                return RedirectToAction("HienthiSanpham");
+            }
+            else return BadRequest();
+        }
+
     }
 }

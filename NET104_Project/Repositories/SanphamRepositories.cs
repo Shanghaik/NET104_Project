@@ -21,7 +21,16 @@ namespace NET104_Project.Repositories
 
         public bool AddSanpham(Sanpham sanpham)
         {
-            throw new NotImplementedException();
+            try
+            {
+                cuahangDbContext.Sanphams.Add(sanpham);
+                cuahangDbContext.SaveChanges();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            } 
         }
 
         public IEnumerable<Sanpham> GetAll() // Lấy tất cả SP
@@ -56,6 +65,7 @@ namespace NET104_Project.Repositories
 
         public bool UpdateSanpham(Sanpham sanpham)
         {
+            //var sp = cuahangDbContext.Find();
             try
             {
                 cuahangDbContext.Sanphams.Update(sanpham);
