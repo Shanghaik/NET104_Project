@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "HienthiSanpham";
+    var so = ViewData["so"] as List<int>;
+    var chu = ViewData["chu"] as string;
+    var ids = ViewData["allId"] as List<Guid>;
 }
 
 <h1>HienthiSanpham</h1>
@@ -37,5 +40,13 @@
             </td>
         </tr>
 }
+        @foreach (var item in so)
+        {
+            <h3>@chu @item</h3>
+        }
+        @foreach (var item in ids)
+        {
+            <h3>ID của mình là: @item</h3>
+        }
     </tbody>
 </table>

@@ -66,8 +66,13 @@ namespace NET104_Project.Repositories
         public bool UpdateSanpham(Sanpham sanpham)
         {
             //var sp = cuahangDbContext.Find();
+            //Sanpham a = new Sanpham();
+            //Sanpham b = a;
             try
             {
+                //var sp = GetById(sanpham.Id);
+                //sanpham.Ten = sp.Ten;//... => Đúng cho mọi tình huống
+
                 cuahangDbContext.Sanphams.Update(sanpham);
                 cuahangDbContext.SaveChanges();
                 return true;

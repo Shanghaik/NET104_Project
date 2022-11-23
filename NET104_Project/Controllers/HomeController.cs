@@ -44,6 +44,17 @@ namespace NET104_Project.Controllers
 
         public IActionResult HienthiSanpham()
         {
+            // ViewData
+            List<int> so = new List<int>() { 1, 2, 3, 4 };
+            string s = "Xin chào các bạn, mình có số: ";
+            ViewData["so"] = so;
+            ViewData["chu"] = s;
+            List<Guid> ids = new List<Guid>();
+            foreach (var item in _sanphamRepositories.GetAll())
+            {
+                ids.Add(item.Id);
+            }
+            ViewData["allId"] = ids;
             var sanphams = _sanphamRepositories.GetAll();
             return View(sanphams);
         }
@@ -72,11 +83,12 @@ namespace NET104_Project.Controllers
         }
         public IActionResult Edit(Guid id)
         {
-            return View();
+            return View(_sanphamRepositories.GetById(id));
         }
         [HttpPost]
         public IActionResult Edit(Sanpham sp)
         {
+            
             if (_sanphamRepositories.UpdateSanpham(sp))
             {
                 return RedirectToAction("HienthiSanpham");
