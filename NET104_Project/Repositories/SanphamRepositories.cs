@@ -44,8 +44,7 @@ namespace NET104_Project.Repositories
             // Find(param) chỉ dùng với id của sản phẩm
             var sanpham2 = cuahangDbContext.Sanphams.
                 FirstOrDefault(p => p.Id == id);
-            return sanpham; // sanpham2
-           
+            return sanpham; // sanpham2          
         }
 
         public bool RemoveSanpham(Sanpham sanpham) // Xóa sản phẩm

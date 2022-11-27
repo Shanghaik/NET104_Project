@@ -96,5 +96,46 @@ namespace NET104_Project.Controllers
             else return BadRequest();
         }
 
+        public IActionResult SearchByName()
+        {
+            return View();
+        }
+        [HttpGet]
+        public IActionResult SearchByName(string xxx)
+        {
+            if (!string.IsNullOrEmpty(xxx))
+            {
+                var result = _sanphamRepositories.GetAll().Where(p => p.Ten.Contains(xxx)).ToList();
+                if (result.Count > 0)
+                {
+                    ViewData["amount"] = "Số lượng sản phẩm tìm kiếm được là: " + result.Count;
+                    return View(result);
+                }
+                else
+                {
+                    ViewData["result"] = "Không có sản phẩm nào mà tên có chứa " + xxx;
+                }
+            }          
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult SearchByName2(string xxx)
+        {
+            if (!string.IsNullOrEmpty(xxx))
+            {
+                var result = _sanphamRepositories.GetAll().Where(p => p.Ten.Contains(xxx)).ToList();
+                if (result.Count > 0)
+                {
+                    ViewData["amount"] = "Số lượng sản phẩm tìm kiếm được là: " + result.Count;
+                    return View("HienthiSanpham", result); // Dùng chung view thì ta return đúng về tên view dùng chung
+                }
+                else
+                {
+                    ViewData["result"] = "Không có sản phẩm nào mà tên có chứa " + xxx;
+                }
+            }
+            return View();
+        }
     }
 }

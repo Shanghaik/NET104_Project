@@ -1,26 +1,19 @@
-﻿@model IEnumerable<NET104_Project.Models.Sanpham>
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@model IEnumerable<NET104_Project.Models.Sanpham>
 
 @{
-    ViewData["Title"] = "HienthiSanpham";
-    var so = ViewData["so"] as List<int>;
-    var chu = ViewData["chu"] as string;
-    var ids = ViewData["allId"] as List<Guid>;
     var thongbao = ViewData["result"] as string;
     var amount = ViewData["amount"] as string;
 }
+<h2>Form tìm kiếm</h2>
 
-<h1>HienthiSanpham</h1>
-
-<p>
-    <a asp-action="CreateNew">Tạo mới</a>
-    <a asp-action="SearchByName">Tìm kiếm</a>
-
-</p>
-<form method="get" asp-controller="Home" asp-action="SearchByName2">
+<form method="get" asp-controller="Home" asp-action="SearchByName">
     <input name="xxx" type="text" placeholder="Search">
     <button type="submit">Submit</button>
 </form>
-@if (thongbao != null)
+@if (thongbao!=null)
 {
     <h3>@thongbao</h3>
 }
