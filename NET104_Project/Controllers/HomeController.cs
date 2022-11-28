@@ -135,7 +135,7 @@ namespace NET104_Project.Controllers
                     ViewData["result"] = "Không có sản phẩm nào mà tên có chứa " + xxx;
                 }
             }
-            return View();
+            return View("HienthiSanpham");
         }
     }
 }
