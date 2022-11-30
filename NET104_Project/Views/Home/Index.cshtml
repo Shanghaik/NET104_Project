@@ -1,8 +1,15 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Home Page";
+    var thongtin = ViewData["thongtin"] as string;
 }
 
 <div class="text-center">
-    <h1 class="display-4">Xin chào đây là C#4</h1>
+    @if (thongtin != null)
+    {
+        <h1 class="display-4">Xin chào đây là: @thongtin</h1>
+    }else{
+        <h1 class="display-4">Xin chào</h1>
+    } 
     <p>Learn about <a href="https://lms.poly.edu.vn/">Trang học tập của Polytechnic</a>.</p>
 </div>

@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
@@ -25,6 +25,9 @@ namespace NET104_Project
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSession(p => {
+                p.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
             services.AddControllersWithViews();
             services.AddMvc();
             services.AddScoped<ISanphamRepositories, SanphamRepositories>(); // Add DI
@@ -47,7 +50,7 @@ namespace NET104_Project
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession(); // Thêm để dùng Session
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

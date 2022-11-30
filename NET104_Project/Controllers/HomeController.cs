@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using NET104_Project.IRepositories;
 using NET104_Project.Models;
@@ -24,6 +25,12 @@ namespace NET104_Project.Controllers
 
         public IActionResult Index()
         {
+            var thongtin = HttpContext.Session.GetString("username");
+            if (thongtin != null)
+            {
+                ViewData["thongtin"] = thongtin;
+                return View(); // truyền dữ liệu lấy được từ Session
+            }
             return View();
         }
 
@@ -137,5 +144,23 @@ namespace NET104_Project.Controllers
             }
             return View("HienthiSanpham");
         }
+
+        public IActionResult Login(string username, string password)
+        {
+            if(string.IsNullOrEmpty(username) || password.Length < 6)
+            {
+                ViewData["ketqua"] = "Sai thông tin tài khoản";
+                return View();
+            }
+            else
+            {
+                HttpContext.Session.SetString("username", username); // Lưu dữ liệu vào Session
+                return RedirectToAction("Index"); // Đặng nhập thành công thì đẩy sang trang chủ
+            }
+            return View();
+        }
+
+
+
     }
 }
