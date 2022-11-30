@@ -31,6 +31,8 @@ namespace NET104_Project.Controllers
                 ViewData["thongtin"] = thongtin;
                 return View(); // truyền dữ liệu lấy được từ Session
             }
+            // Khi muốn xóa thông tin từ Session (logout)
+            HttpContext.Session.Remove("tên session");
             return View();
         }
 
